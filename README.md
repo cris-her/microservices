@@ -14,6 +14,10 @@ docker run -d -p 80:80 \
   --name docker-tutorial docker101tutorial  
 
 
+docker tag docker101tutorial {userName}/docker101tutorial  
+docker push {userName}/docker101tutorial  
+
+
 docker ps  
 docker ps -a  
 docker image ls  

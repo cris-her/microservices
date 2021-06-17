@@ -25,6 +25,7 @@ docker build -t name_of_image .
 docker run --rm -p 6006:6006 name_of_image  
 
 
+docker-compose build  
 docker-compose up  
 docker-compose stop service_name  
 

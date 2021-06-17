@@ -10,7 +10,7 @@ cd getting-started
 docker build -t docker101tutorial .  
 
 
-docker run -d -p 80:80 \
+docker run -d -p 80:80 \  
   --name docker-tutorial docker101tutorial  
 
 

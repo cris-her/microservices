@@ -65,7 +65,7 @@ docker cp copytest:/testing localtesting  -- no es necesario que el contenedor e
 docker image ls  
 docker pull ubuntu:20.04
 
-d o c k e r    f i l e  
+d o c k e r f i l e  
 FROM ubuntu:latest  
 RUN touch /usr/src/hola-platzi.txt  -- misma capa
 

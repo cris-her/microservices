@@ -95,9 +95,89 @@ CMD ["npx", "nodemon", "index.js"]
 
 docker run --rm -p 3000:3000 -v path/index.js:/usr/srcindex.js my-app  -- bindmount  
 
+docker network ls  
+docker network create --attachable my-net  
+docker network inspect my-net  
+docker network connect my-net db  
+docker run -d --name app -p 3000:3000 --env MONGO_URL=mongodb://db:27017/test my-app  
+ 
+docker-compose up -d  
+docker-compose logs -follow service_name1 service_name2  
+docker-compose exec app bash -- it no es necesario con docker compose  
+docker-compose ps  
+docker-compose down  
+docker-compose stop service_name1  
+docker-compose start service_name1  
 
+d o c k e r - c o m p o s e . y m l  
+version: "3.8"  
 
-docker-compose build   
-docker-compose up  
-docker-compose stop service_name  
+services:  
+  app:  
+    build: .  
+    environment:  
+      MONGO_URL: "mongodb://db:27017/test"  
+    depends_on:  
+      - db  
+    ports:  
+      - "3000-3001:3000"  
+    volumes:  
+      - .:/usr/src  
+      - /usr/src/node_modules  
+    command: npx nodemon index.js  -- monitoreo  
+    
 
+  db:  
+    image: mongo  
+
+docker-compose build service_name1  
+fig up -d  
+alias fig  
+env  
+git status  
+
+d o c k e r - c o m p o s e . o v e r r i d e . y m l - ports solo en uno de los dos  
+version: "3.8"  
+
+services:  
+  app:  
+    build: .  
+  environment:  
+    UNA_VARIABLE: "Hola Mundo"  
+
+docker-compose up -d --scale my-app=2 - concurrente, balanceo de carga  
+
+docker ps -q  
+docker rm -f $(docker ps -aq) - para contenedores, buscar equivalente para imágenes  
+docker network prune  
+docker volume prune  
+docker system prune  
+
+docker run -d --name app --memory 1g image_name -- 4m OOMKilled  
+docker stats  
+
+docker stop looper  
+docker ps -l  -- last process, status>128 excepción o señal no manejada correctamente  
+docker kill looper  -- no opcion a gracefull shutdown sin afectar a los usuarios una vez que no tenga peticiones  
+docker exec looper ps -ef  
+CMD /loop.sh -- shell form como comando hijo del shell  
+[CMD /loop.sh] -- exec form directo efecto al stop, no combinarlas  
+
+docker run --name pinger ping hostname  
+hostname  
+
+d o c k e r f i l e  
+FROM ubuntu:trusty  
+ENTRYPOINT ["/bin/ping", "-c", "3"]  
+CMD ["localhost"]  
+
+docker run --name pinger ping  
+docker run --name pinger ping google.com -- binarios autocontenidos que pueden correr en cualquier sistema de soporte docker sin necesidad de tenerlo instalado nativamente  
+
+. d o c k e r i g n o r e -- contexto de build  
+
+docker build -t prodapp -f build/production.Dockerfile . -- multi-stage build  
+
+-- docker-in-docker, en linux todo es un archivo, montar socket en un contenedor con docker    
+docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock docker:19.03.12  
+docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/bin/docker wagoodman/dive:latest prodapp    

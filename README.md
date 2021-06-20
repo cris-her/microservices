@@ -1,5 +1,6 @@
-# microservices - quick guide
+# microservices - quick guide  
 
+DOCKER  
 
 docker run --name repo alpine/git clone \  
   https://github.com/docker/getting-started.git  

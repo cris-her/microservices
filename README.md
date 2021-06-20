@@ -178,6 +178,6 @@ docker run --name pinger ping google.com -- binarios autocontenidos que pueden c
 
 docker build -t prodapp -f build/production.Dockerfile . -- multi-stage build  
 
--- docker-in-docker, en linux todo es un archivo, montar socket en un contenedor con docker    
+-- docker-in-docker, en linux todo es un archivo, montar socket en un contenedor con docker, puede ser inseguro  
 docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock docker:19.03.12  
 docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/bin/docker wagoodman/dive:latest prodapp    

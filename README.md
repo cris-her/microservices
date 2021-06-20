@@ -85,12 +85,16 @@ https://github.com/cris-her/docker
 docker run --rm -p 6006:6006 name_of_image  
 
 d o c k e r f i l e - caché  
-FROM node:12
-COPY [".", "/usr/src/"]
-WORKDIR /usr/src
-RUN npm install
-EXPOSE 3000
-CMD ["node", "index.js"]
+FROM node:12  
+COPY ["package.json", "package-lock.json", "/usr/src/"]  
+WORKDIR /usr/src  
+RUN npm install  
+COPY [".", "/usr/src/"]  
+EXPOSE 3000  
+CMD ["npx", "nodemon", "index.js"]  
+
+docker run --rm -p 3000:3000 -v path/index.js:/usr/srcindex.js my-app  -- bindmount  
+
 
 
 docker-compose build   

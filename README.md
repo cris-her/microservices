@@ -67,10 +67,9 @@ docker pull ubuntu:20.04
 
 d o c k e r f i l e  
 FROM ubuntu:latest  
-RUN touch /usr/src/hola-platzi.txt  -- misma capa
+RUN touch /usr/src/hola-mundo.txt  -- misma capa
 
-docker build -t ubuntu:name .  
-docker run --rm -p 6006:6006 name_of_image  
+docker build -t ubuntu:name .   
 docker login  
 docker tag ubuntu:name user_name/ubuntu:platzi  
 docker push user_name/ubuntu:platzi  
@@ -83,6 +82,15 @@ https://docs.docker.com/engine/reference/commandline/commit/
 -- desarrollo  
 
 https://github.com/cris-her/docker  
+docker run --rm -p 6006:6006 name_of_image  
+
+d o c k e r f i l e - caché  
+FROM node:12
+COPY [".", "/usr/src/"]
+WORKDIR /usr/src
+RUN npm install
+EXPOSE 3000
+CMD ["node", "index.js"]
 
 
 docker-compose build   

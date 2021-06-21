@@ -3,8 +3,8 @@
 This seems to be a bug in preview build of Windows 10. I got it to work by simply providing the -Force parameter.  
 
 Setting for Local Machine: Set-ExecutionPolicy RemoteSigned -Force  
-* Setting for Current User: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force  
-.\add-firewall-rules-for-sts-auth-thru-docker.ps1  
+--> Setting for Current User: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force  
+--> .\add-firewall-rules-for-sts-auth-thru-docker.ps1  
 
 DOCKER  
 
